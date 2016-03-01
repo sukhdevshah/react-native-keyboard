@@ -25,7 +25,6 @@ export default StyleSheet.create({
 
 export let keyStyle = StyleSheet.create({
     wrapper: {
-        flex: 1,
         height: 48,
         backgroundColor: '#fff'
     },
