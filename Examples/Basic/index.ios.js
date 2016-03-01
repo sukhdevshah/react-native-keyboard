@@ -4,7 +4,6 @@
  */
 'use strict';
 
-
 import React, {
     View, Text, StyleSheet,
 } from 'react-native';
@@ -100,3 +99,4 @@ let styles = StyleSheet.create({
 
 
 AppRegistry.registerComponent('Basic', () => App);
+
