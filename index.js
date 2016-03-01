@@ -37,8 +37,8 @@ class Keyboard extends React.Component {
         super(props);
     }
 
-    clearText() {
-        this.keys = [];
+    _clearAll() {
+        this.props.onClear();
     }
 
     _onPress(key) {
@@ -123,7 +123,7 @@ class Keyboard extends React.Component {
                             underlayColor="#ffffff" 
                             style={[keyStyle.wrapper, keyStyle.bg_d2d5dc]}
                             onPress={this._onPress.bind(this, 'del')}
-                            onLongPress={this.clearText.bind(this)}
+                            onLongPress={this._clearAll.bind(this)}
                         >
                             <View style={keyStyle.bd}>
                                 <Image source={require('./images/icon_delete.png')}/>
