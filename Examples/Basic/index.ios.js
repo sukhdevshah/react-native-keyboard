@@ -4,41 +4,99 @@
  */
 'use strict';
 
+
 import React, {
-    AppRegistry,
-    Component,
-    StyleSheet,
-    Text,
-    View
+    View, Text, StyleSheet,
 } from 'react-native';
 
-import Keyboard from '../../index';
+import Keyboard from 'react-native-keyboard';
 
-class Basic extends Component {
+
+let model = {
     
+    _keys: [],
+
+    _listeners: [],
+
+    addKey(key) {
+        this._keys.push(key);
+        this._notify();
+    },
+
+    delKey() {
+        console.log(123)
+        this._keys.pop();
+        this._notify();
+    },
+
+    clearAll() {
+        this._keys = [];
+        this._notify();
+    },
+
+    getKeys() {
+        return this._keys;
+    },
+
+    onChange(listener) {
+        if (typeof listener === 'function') {
+            this._listeners.push(listener);
+        }
+    },
+
+    _notify() {
+        this._listeners.forEach((listner) => {
+            listner(this);
+        });
+    }
+};
+
+
+class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            words: []        
+            text: ''
         };
     }
 
-    _handlePress() {
+    componentDidMount() {
+        model.onChange((model) => {
+            this.setState({text: model.getKeys().join('')});
+        });
+    }
 
+    _handleClear() {
+        model.clearAll();
+    }
+
+    _handleDelete() {
+        model.delKey();
+    }
+
+    _handleKeyPress(key) {
+        model.addKey(key);
     }
 
     render() {
         return (
             <View style={{flex: 1}}>
-                <Text>{this.state.words.join('')}</Text>
+                <Text style={styles.text}>{this.state.text}</Text>
+
                 <Keyboard 
                     isRenderDot={true}
-                    onPress={this._handlePress.bind(this)} 
+                    onClear={this._handleClear.bind(this)}
+                    onDelete={this._handleDelete.bind(this)}
+                    onKeyPress={this._handleKeyPress.bind(this)}
                 />
             </View>
         );
     }
 }
 
+let styles = StyleSheet.create({
+    text: {marginTop: 100, textAlign: 'center'}
+});
 
-AppRegistry.registerComponent('Basic', () => Basic);
+
+AppRegistry.registerComponent('Basic', () => App);

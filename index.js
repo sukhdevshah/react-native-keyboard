@@ -1,21 +1,15 @@
 /**
- * @Keyboard
+ * Keyboard
  */
 'use strict';
 
+import React, {
+    View, Text, Image, TouchableHighlight, PropTypes
+} from 'react-native';
 
-import React from 'react-native';
-
-import styles, {keyStyle, BG_COLOR} from './styles';
-
-
-const {
-    View, 
-    Text, 
-    Image,
-    StyleSheet,
-    TouchableHighlight
-} = React;
+import styles, {
+    keyStyle, BG_COLOR
+} from './styles';
 
 
 const numberKeys = [
@@ -37,13 +31,10 @@ const numberKeys = [
 ];
 
 
-
-
 class Keyboard extends React.Component {
-    
+
     constructor(props) {
         super(props);
-        this.keys = [];
     }
 
     clearText() {
@@ -56,11 +47,11 @@ class Keyboard extends React.Component {
 
         // delete key
         } else if (key === 'del') {
-            this.keys.pop();
+            this.props.onDelete();
 
         // number key
         } else {
-            this.keys.push(key);
+            this.props.onKeyPress(key);
         }
     }
 
@@ -111,7 +102,7 @@ class Keyboard extends React.Component {
                         <TouchableHighlight 
                             underlayColor="#ffffff" 
                             style={[keyStyle.wrapper, keyStyle.bg_d2d5dc]}
-                            onPress={this._onPress.bind(this, '')}
+                            onPress={this._onPress.bind(this, props.isRenderDot ? '.' : '')}
                         >
                             <View style={keyStyle.bd}>
                                 {this._renderDot()}
@@ -144,6 +135,26 @@ class Keyboard extends React.Component {
         );
     }
 }
+
+
+Keyboard.propTypes = {
+    // 是否显示小数点符号
+    isRenderDot :   PropTypes.bool,
+    // 点击键盘按键
+    onKeyPress  :   PropTypes.func,
+    // 点击删除按钮
+    onDelete    :   PropTypes.func,
+    // 长按删除按钮
+    onClear     :   PropTypes.func
+};
+
+
+Keyboard.defaultProps = {
+    isRenderDot :   false,
+    onKeyPress  :   () => {},
+    onDelete    :   () => {},
+    onClear     :   () => {}
+};
 
 
 export default Keyboard;

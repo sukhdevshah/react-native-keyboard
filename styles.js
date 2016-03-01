@@ -2,8 +2,7 @@
 
 import React, {StyleSheet} from 'react-native';
 
-const ONE_PIXEL = 1 / React.PixelRatio.get();
-
+const hairlineWidth = StyleSheet.hairlineWidth;
 
 export const BG_COLOR = '#d2d5dc';
 
@@ -34,8 +33,8 @@ export let keyStyle = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRightWidth: ONE_PIXEL,
-        borderTopWidth: ONE_PIXEL,
+        borderRightWidth: hairlineWidth,
+        borderTopWidth: hairlineWidth,
         borderColor: '#a5a5a5'
     },
     mainText: {
