@@ -98,5 +98,5 @@ let styles = StyleSheet.create({
 });
 
 
-AppRegistry.registerComponent('Basic', () => App);
+React.AppRegistry.registerComponent('Basic', () => App);
 
