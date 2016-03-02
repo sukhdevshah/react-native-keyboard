@@ -23,7 +23,6 @@ let model = {
     },
 
     delKey() {
-        console.log(123)
         this._keys.pop();
         this._notify();
     },
