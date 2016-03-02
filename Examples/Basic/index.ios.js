@@ -80,8 +80,9 @@ class App extends React.Component {
     render() {
         return (
             <View style={{flex: 1}}>
-                <Text style={styles.text}>{this.state.text}</Text>
-
+                <View style={{flex: 1}}>
+                    <Text style={styles.text}>{this.state.text}</Text>
+                </View>    
                 <Keyboard 
                     isRenderDot={true}
                     onClear={this._handleClear.bind(this)}
