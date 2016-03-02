@@ -84,7 +84,7 @@ class App extends React.Component {
                     <Text style={styles.text}>{this.state.text}</Text>
                 </View>    
                 <Keyboard 
-                    isRenderDot={true}
+                    keyboardType="decimal-pad"
                     onClear={this._handleClear.bind(this)}
                     onDelete={this._handleDelete.bind(this)}
                     onKeyPress={this._handleKeyPress.bind(this)}
