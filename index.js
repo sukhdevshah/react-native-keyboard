@@ -37,8 +37,8 @@ class Keyboard extends React.Component {
         super(props);
     }
 
-    clearText() {
-        this.keys = [];
+    _clearAll() {
+        this.props.onClear();
     }
 
     _onPress(key) {
@@ -81,12 +81,25 @@ class Keyboard extends React.Component {
         });
     }
 
-    _renderDot() {
-        if (!this.props.isRenderDot) {
-            return null;
-        } else {
-            return <Text style={[keyStyle.mainText, keyStyle.dot]}>.</Text>;    
+    _isDecimalPad() {
+        return this.props.keyboardType === 'decimal-pad';
+    }
+
+    _renderDotKey() {
+        let dotNode = null, dotText = '';
+        if (this._isDecimalPad()) {
+            dotText = '.';
+            dotNode = <Text style={[keyStyle.mainText, keyStyle.dot]}>.</Text>;
         }
+        return (
+            <TouchableHighlight 
+                underlayColor="#ffffff" 
+                style={[keyStyle.wrapper, keyStyle.bg_d2d5dc]} 
+                onPress={this._onPress.bind(this, dotText)}
+            >
+                <View style={keyStyle.bd}>{dotNode}</View>
+            </TouchableHighlight>
+        );
     }
 
     render() {
@@ -99,15 +112,7 @@ class Keyboard extends React.Component {
                     {this._renderNumberKeys()}
 
                     <View style={styles.row}>
-                        <TouchableHighlight 
-                            underlayColor="#ffffff" 
-                            style={[keyStyle.wrapper, keyStyle.bg_d2d5dc]}
-                            onPress={this._onPress.bind(this, props.isRenderDot ? '.' : '')}
-                        >
-                            <View style={keyStyle.bd}>
-                                {this._renderDot()}
-                            </View>
-                        </TouchableHighlight>
+                        {this._renderDotKey()}
                         
                         <TouchableHighlight 
                             underlayColor={BG_COLOR} 
@@ -123,7 +128,7 @@ class Keyboard extends React.Component {
                             underlayColor="#ffffff" 
                             style={[keyStyle.wrapper, keyStyle.bg_d2d5dc]}
                             onPress={this._onPress.bind(this, 'del')}
-                            onLongPress={this.clearText.bind(this)}
+                            onLongPress={this._clearAll.bind(this)}
                         >
                             <View style={keyStyle.bd}>
                                 <Image source={require('./images/icon_delete.png')}/>
@@ -139,21 +144,21 @@ class Keyboard extends React.Component {
 
 Keyboard.propTypes = {
     // 是否显示小数点符号
-    isRenderDot :   PropTypes.bool,
+    keyboardType :   PropTypes.oneOf(['number-pad', 'decimal-pad']),
     // 点击键盘按键
-    onKeyPress  :   PropTypes.func,
+    onKeyPress   :   PropTypes.func,
     // 点击删除按钮
-    onDelete    :   PropTypes.func,
+    onDelete     :   PropTypes.func,
     // 长按删除按钮
-    onClear     :   PropTypes.func
+    onClear      :   PropTypes.func
 };
 
 
 Keyboard.defaultProps = {
-    isRenderDot :   false,
-    onKeyPress  :   () => {},
-    onDelete    :   () => {},
-    onClear     :   () => {}
+    keyboardType :   'number-pad',
+    onKeyPress   :   () => {},
+    onDelete     :   () => {},
+    onClear      :   () => {}
 };
 
 

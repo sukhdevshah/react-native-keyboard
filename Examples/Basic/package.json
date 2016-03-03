@@ -7,6 +7,6 @@
   },
   "dependencies": {
     "react-native": "^0.20.0",
-    "react-native-keyboard": "file:../.."
+    "react-native-keyboard": "file:../../"
   }
 }

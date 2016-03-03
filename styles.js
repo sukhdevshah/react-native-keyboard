@@ -9,7 +9,6 @@ export const BG_COLOR = '#d2d5dc';
 
 export default StyleSheet.create({
     wrapper: {
-        flex: 1,
         flexDirection: 'row',
         backgroundColor: '#f4f4f4'
     },
