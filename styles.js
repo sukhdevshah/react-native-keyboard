@@ -36,6 +36,9 @@ export let keyStyle = StyleSheet.create({
         borderTopWidth: hairlineWidth,
         borderColor: '#a5a5a5'
     },
+    border: {
+      borderColor: '#FFF'
+    },
     mainText: {
         fontSize: 20,
         color: '#000'
@@ -46,6 +49,9 @@ export let keyStyle = StyleSheet.create({
     },
     bg_d2d5dc: {
         backgroundColor: BG_COLOR
+    },
+    bgLessL: {
+      backgroundColor: '#fff'
     },
     dot: {
         height: 30,

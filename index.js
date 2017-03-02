@@ -55,6 +55,38 @@ class Keyboard extends React.Component {
         }
     }
 
+    _renderOtherText(key) {
+      if (this.props.disableOtherText !== true) {
+        return (<Text style={keyStyle.otherText}>{key.otherText}</Text>);
+      }
+
+      return null;
+    }
+
+    _disableBorder() {
+      if (this.props.disableBorder !== true) {
+        return keyStyle.bd;
+      }
+
+      return keyStyle.border;
+    }
+
+    _disableClearButtonBackground() {
+      if (this.props.disableClearButtonBackground !== true) {
+        return keyStyle.bg_d2d5dc;
+      }
+
+      return keyStyle.bgLess;
+    }
+
+    _clearBtnUnderlayColor() {
+      if (this.props.disableClearButtonBackground !== true) {
+        return '#ffffff';
+      }
+
+      return '#d2d5dc';
+    }
+
     _renderKey(key, index) {
         return (
             <TouchableHighlight 
@@ -63,9 +95,9 @@ class Keyboard extends React.Component {
                 style={keyStyle.wrapper} 
                 onPress={this._onPress.bind(this, key.mainText)}
             >
-                <View style={keyStyle.bd}>
+                <View style={[keyStyle.bd, this._disableBorder()]}>
                     <Text style={keyStyle.mainText}>{key.mainText}</Text>
-                    <Text style={keyStyle.otherText}>{key.otherText}</Text>
+                    {this._renderOtherText(key)}
                 </View>
             </TouchableHighlight>    
         );
@@ -86,7 +118,13 @@ class Keyboard extends React.Component {
     }
 
     _renderDotKey() {
+<<<<<<< e10c2d338646be31da51d1ec4a88f44cc2a1afcb
         let dotNode = null, dotText = '';
+=======
+      if (this.props.disableDot !== true) {
+        let dotNode = null,
+        dotText = '';
+>>>>>>> Updated Old React Issues and Added new Prop Features
         if (this._isDecimalPad()) {
             dotText = '.';
             dotNode = <Text style={[keyStyle.mainText, keyStyle.dot]}>.</Text>;
@@ -97,9 +135,18 @@ class Keyboard extends React.Component {
                 style={[keyStyle.wrapper, keyStyle.bg_d2d5dc]} 
                 onPress={this._onPress.bind(this, dotText)}
             >
-                <View style={keyStyle.bd}>{dotNode}</View>
+                <View style={[keyStyle.bd, this._disableBorder()]}>{dotNode}</View>
             </TouchableHighlight>
         );
+      }
+
+      return (
+        <TouchableHighlight
+          style={keyStyle.wrapper}
+        >
+          <View />
+        </TouchableHighlight>
+      );
     }
 
     render() {
@@ -119,11 +166,12 @@ class Keyboard extends React.Component {
                             style={keyStyle.wrapper}
                             onPress={this._onPress.bind(this, '0')}
                         >
-                            <View style={keyStyle.bd}>
+                            <View style={[keyStyle.bd, this._disableBorder()]}>
                                 <Text style={keyStyle.mainText}>0</Text>
                             </View>
                         </TouchableHighlight>
 
+<<<<<<< e10c2d338646be31da51d1ec4a88f44cc2a1afcb
                         <TouchableHighlight 
                             underlayColor="#ffffff" 
                             style={[keyStyle.wrapper, keyStyle.bg_d2d5dc]}
@@ -132,6 +180,16 @@ class Keyboard extends React.Component {
                         >
                             <View style={keyStyle.bd}>
                                 <Image source={require('./images/icon_delete.png')}/>
+=======
+                        <TouchableHighlight
+                            underlayColor={this._clearBtnUnderlayColor()}
+                            style={[keyStyle.wrapper, this._disableClearButtonBackground()]}
+                            onPress={this._onPress.bind(this, 'del')}
+                            onLongPress={this._clearAll.bind(this)}
+                        >
+                            <View style={[keyStyle.bd, this._disableBorder()]}>
+                                <Image source={require('./images/icon_delete.png')} />
+>>>>>>> Updated Old React Issues and Added new Prop Features
                             </View>
                         </TouchableHighlight>
                     </View>    
