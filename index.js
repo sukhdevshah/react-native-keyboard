@@ -3,8 +3,9 @@
  */
 'use strict';
 
-import React, {
-    View, Text, Image, TouchableHighlight, PropTypes
+import React, { Component, PropTypes } from 'react';
+import {
+    View, Text, Image, TouchableHighlight
 } from 'react-native';
 
 import styles, {
@@ -14,24 +15,24 @@ import styles, {
 
 const numberKeys = [
     [
-        {mainText: '1', otherText: ''},
-        {mainText: '2', otherText: 'ABC'},
-        {mainText: '3', otherText: 'DEF'}
+        { mainText: '1', otherText: '' },
+        { mainText: '2', otherText: 'ABC' },
+        { mainText: '3', otherText: 'DEF' }
     ],
     [
-        {mainText: '4', otherText: 'GHI'},
-        {mainText: '5', otherText: 'JKL'},
-        {mainText: '6', otherText: 'MNO'}
+        { mainText: '4', otherText: 'GHI' },
+        { mainText: '5', otherText: 'JKL' },
+        { mainText: '6', otherText: 'MNO' }
     ],
     [
-        {mainText: '7', otherText: 'PQRS'},
-        {mainText: '8', otherText: 'TUV'},
-        {mainText: '9', otherText: 'WXYZ'}
+        { mainText: '7', otherText: 'PQRS' },
+        { mainText: '8', otherText: 'TUV' },
+        { mainText: '9', otherText: 'WXYZ' }
     ]
 ];
 
 
-class Keyboard extends React.Component {
+class Keyboard extends Component {
 
     constructor(props) {
         super(props);
@@ -89,17 +90,17 @@ class Keyboard extends React.Component {
 
     _renderKey(key, index) {
         return (
-            <TouchableHighlight 
-                key={index} 
-                underlayColor={BG_COLOR} 
-                style={keyStyle.wrapper} 
+            <TouchableHighlight
+                key={index}
+                underlayColor={BG_COLOR}
+                style={keyStyle.wrapper}
                 onPress={this._onPress.bind(this, key.mainText)}
             >
                 <View style={[keyStyle.bd, this._disableBorder()]}>
                     <Text style={keyStyle.mainText}>{key.mainText}</Text>
                     {this._renderOtherText(key)}
                 </View>
-            </TouchableHighlight>    
+            </TouchableHighlight>
         );
     }
 
@@ -118,21 +119,17 @@ class Keyboard extends React.Component {
     }
 
     _renderDotKey() {
-<<<<<<< e10c2d338646be31da51d1ec4a88f44cc2a1afcb
-        let dotNode = null, dotText = '';
-=======
       if (this.props.disableDot !== true) {
         let dotNode = null,
         dotText = '';
->>>>>>> Updated Old React Issues and Added new Prop Features
         if (this._isDecimalPad()) {
             dotText = '.';
             dotNode = <Text style={[keyStyle.mainText, keyStyle.dot]}>.</Text>;
         }
         return (
-            <TouchableHighlight 
-                underlayColor="#ffffff" 
-                style={[keyStyle.wrapper, keyStyle.bg_d2d5dc]} 
+            <TouchableHighlight
+                underlayColor="#ffffff"
+                style={[keyStyle.wrapper, keyStyle.bg_d2d5dc]}
                 onPress={this._onPress.bind(this, dotText)}
             >
                 <View style={[keyStyle.bd, this._disableBorder()]}>{dotNode}</View>
@@ -150,19 +147,19 @@ class Keyboard extends React.Component {
     }
 
     render() {
-        let props = this.props;
+        const props = this.props;
 
         return (
             <View style={styles.wrapper}>
                 <View style={styles.main}>
-                    
+
                     {this._renderNumberKeys()}
 
                     <View style={styles.row}>
                         {this._renderDotKey()}
-                        
-                        <TouchableHighlight 
-                            underlayColor={BG_COLOR} 
+
+                        <TouchableHighlight
+                            underlayColor={BG_COLOR}
                             style={keyStyle.wrapper}
                             onPress={this._onPress.bind(this, '0')}
                         >
@@ -171,16 +168,6 @@ class Keyboard extends React.Component {
                             </View>
                         </TouchableHighlight>
 
-<<<<<<< e10c2d338646be31da51d1ec4a88f44cc2a1afcb
-                        <TouchableHighlight 
-                            underlayColor="#ffffff" 
-                            style={[keyStyle.wrapper, keyStyle.bg_d2d5dc]}
-                            onPress={this._onPress.bind(this, 'del')}
-                            onLongPress={this._clearAll.bind(this)}
-                        >
-                            <View style={keyStyle.bd}>
-                                <Image source={require('./images/icon_delete.png')}/>
-=======
                         <TouchableHighlight
                             underlayColor={this._clearBtnUnderlayColor()}
                             style={[keyStyle.wrapper, this._disableClearButtonBackground()]}
@@ -189,10 +176,9 @@ class Keyboard extends React.Component {
                         >
                             <View style={[keyStyle.bd, this._disableBorder()]}>
                                 <Image source={require('./images/icon_delete.png')} />
->>>>>>> Updated Old React Issues and Added new Prop Features
                             </View>
                         </TouchableHighlight>
-                    </View>    
+                    </View>
                 </View>
             </View>
         );
@@ -202,31 +188,22 @@ class Keyboard extends React.Component {
 
 Keyboard.propTypes = {
     // 是否显示小数点符号
-    keyboardType :   PropTypes.oneOf(['number-pad', 'decimal-pad']),
+    keyboardType: PropTypes.oneOf(['number-pad', 'decimal-pad']),
     // 点击键盘按键
-    onKeyPress   :   PropTypes.func,
+    onKeyPress: PropTypes.func,
     // 点击删除按钮
-    onDelete     :   PropTypes.func,
+    onDelete: PropTypes.func,
     // 长按删除按钮
-    onClear      :   PropTypes.func
+    onClear: PropTypes.func
 };
 
 
 Keyboard.defaultProps = {
-    keyboardType :   'number-pad',
-    onKeyPress   :   () => {},
-    onDelete     :   () => {},
-    onClear      :   () => {}
+    keyboardType: 'number-pad',
+    onKeyPress: () => {},
+    onDelete: () => {},
+    onClear: () => {}
 };
 
 
 export default Keyboard;
-
-
-
-
-
-
-
-
-
