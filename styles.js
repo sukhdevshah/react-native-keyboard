@@ -1,6 +1,7 @@
 'use strict';
 
-import React, {StyleSheet} from 'react-native';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 
 const hairlineWidth = StyleSheet.hairlineWidth;
 
@@ -22,7 +23,7 @@ export default StyleSheet.create({
 });
 
 
-export let keyStyle = StyleSheet.create({
+export const keyStyle = StyleSheet.create({
     wrapper: {
         flex: 1,
         height: 48,
@@ -36,6 +37,9 @@ export let keyStyle = StyleSheet.create({
         borderTopWidth: hairlineWidth,
         borderColor: '#a5a5a5'
     },
+    border: {
+      borderColor: '#FFF'
+    },
     mainText: {
         fontSize: 20,
         color: '#000'
@@ -47,9 +51,12 @@ export let keyStyle = StyleSheet.create({
     bg_d2d5dc: {
         backgroundColor: BG_COLOR
     },
+    bgLessL: {
+      backgroundColor: '#fff'
+    },
     dot: {
         height: 30,
-        fontSize: 30, 
+        fontSize: 30,
         lineHeight: 25
     }
 });
