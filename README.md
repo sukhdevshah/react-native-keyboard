@@ -1,7 +1,7 @@
 # react-native-keyboard
 A numeric keyboard component.
 
-![ios demo](./ios.png) ![android demo](./android.png)
+![ios demo](./doc/ios.png) ![android demo](./doc/android.png)
 
 ## Install
 1. npm install react-native-keyboard --save
