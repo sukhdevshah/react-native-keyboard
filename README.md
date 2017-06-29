@@ -15,6 +15,46 @@ A numeric keyboard component.
 import React, {View, Text, StyleSheet} from 'react-native';
 import Keyboard from 'react-native-keyboard';
 
+
+let model = {
+    
+    _keys: [],
+
+    _listeners: [],
+
+    addKey(key) {
+        this._keys.push(key);
+        this._notify();
+    },
+
+    delKey() {
+        this._keys.pop();
+        this._notify();
+    },
+
+    clearAll() {
+        this._keys = [];
+        this._notify();
+    },
+
+    getKeys() {
+        return this._keys;
+    },
+
+    onChange(listener) {
+        if (typeof listener === 'function') {
+            this._listeners.push(listener);
+        }
+    },
+
+    _notify() {
+        this._listeners.forEach((listner) => {
+            listner(this);
+        });
+    }
+};
+
+
 class App extends React.Component {
     constructor(props) {
         super(props);
